@@ -8,30 +8,38 @@ verification evidence (tests, builds, smoke), per `agents.md`.
 This file set (`README.md`, `agents.md`, `phases.md`, `architecture.md`,
 `decisions.md`, `brain.md`, `.gitignore`), committed locally. Enterprise
 doc tree (`docs/`, 440 placeholders + manifest + module mapping) created
-2026-10-27 from the uploaded master list (adapted), not yet committed.
-No application code yet.
+2026-10-27 from the uploaded master list (adapted), committed locally
+(4c2bf7a) and pushed to GitHub. No application code yet.
 
-## Phase 1 — Architecture skeleton — NOT STARTED
+## Phase 1 — Architecture skeleton — DONE 2026-10-27 (parent-verified)
 
 Repo layout, conventions, and the scope of the first slice, written and
-tapped before code. Needs the owner's tap to begin.
+verified before code. Delivered: ARCHITECTURE_OVERVIEW, TECH_STACK,
+FOLDER_STRUCTURE, PROJECT_SCOPE (00_Project_Foundation) + manifest and
+brain sync. Done-marked on parent verification under the project goal's
+autonomy grant (verification is the gate; no separate tap).
 
-## Phase 2 — API foundation + first content slice — NOT STARTED
+## Phase 2 — API foundation + first content slice — NEXT (first slice: G01 glossary)
 
-NestJS API foundation (envelope, errors, public-read gating) plus the first
-content slice's public reads. Needs Phase 1 done and its own tap.
+NestJS API foundation (envelope, errors, public-read gating) plus G01
+glossary public reads. First slice = G01: it is first in the Phase 4
+order, and no old-web readers exist in the fresh repo to justify any
+other choice. The slice's Prisma model is a Phase 2 step (schema only,
+no migration run). G01 staff CRUD + S32 land in Phase 3. Begins after
+the Phase 1 commit, so the tree is clean.
 
-## Phase 3 — Auth + admin + S32 on one module — NOT STARTED
+## Phase 3 — Auth + admin + S32 on one module — NOT STARTED (one module: G01)
 
 Capability-based auth, staff admin app, and the S32 workflow (draft →
-review → approve → publish, two-key publish, append-only versions) on a
-single module first. Needs Phase 2 done and its own tap.
+review → approve → publish, two-key publish, append-only versions) on
+G01: staff CRUD + S32 on the Phase 2 slice. Follows Phase 2.
 
 ## Phase 4 — Module-by-module migration — NOT STARTED
 
-Each module on its own tap, in this order:
+Each module in this order (autonomous under the project goal):
 
-1. Canonical masters first: G01 glossary, S01 persons, T01 temples, M10
+1. Canonical masters first: G01 glossary (covered by Phases 2–3: model,
+   public reads, staff CRUD, S32, admin screens), then S01 persons, T01 temples, M10
    festivals, R01 rituals, J05 gemstones, K01 stories, AR05 ragas, AR06
    talas, AU01 audio, VD01 video.
 2. Remaining content modules (C01–C23) plus Samskara, Deity, and Mantra as
@@ -63,7 +71,12 @@ tap. Never before parity.
 
 ## Gates between phases
 
-- Each phase needs its own tap. A tap for one phase is not a tap for the
-  next.
-- No phase is reported done without tests, builds, and smoke evidence.
+- Progression is autonomous under the project goal (owner direction
+  2026-10-27): work moves across phases without a per-phase tap, and
+  progress is reported at phase boundaries.
+- No phase is reported done without its verification evidence (tests,
+  builds, and smoke for code phases; manifest + brain + cross-check
+  evidence for docs-only phases).
 - Nothing is committed or pushed without a tap, per `agents.md`.
+  Deletions still need an explicit word for exactly what is deleted.
+  Owner-gated items stay gated.

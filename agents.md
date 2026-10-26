@@ -57,7 +57,10 @@ binds every task, including code tasks:
 - **A tap authorises one step.** A terse approval ("go", "proceed", "apply
   all ★") authorises only the next concrete step inside the recommended
   sequence. It never overrides an advised guardrail or wait, and never
-  authorises deletion, a push, or a new phase.
+  authorises deletion, a push, or a new phase. Exception: the
+  muse-eternal project goal (owner direction 2026-10-27) authorises
+  autonomous progression across tasks and phases; it does not authorise
+  deletion, pushes, or overriding a guardrail.
 - **Depth over summary.** Consolidated docs carry full content, never
   summaries. Gaps are named, never silently filled.
 - **No invention.** No invented numbers, prices, vocabulary values, fields,

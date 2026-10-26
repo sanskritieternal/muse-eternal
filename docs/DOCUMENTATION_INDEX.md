@@ -54,11 +54,16 @@ from the files actually created, not from the source's claimed totals.
 | 29_Product_Management | 10 | Ongoing — product management |
 | 30_Team_Operations | 10 | Ongoing — team operations |
 | 31_Documentation_System | 10 | Phase 0 — documentation system (this manifest governs) |
-| **Total placeholders** | **440** | |
+| **Total placeholders** | **436** | |
 
 Real (WRITTEN) files in `docs/`: this manifest, `README.md` (tree readme),
-and `modules/README.md` (module mapping). Everything else in the folders
-above is a PLACEHOLDER.
+`modules/README.md` (module mapping), and the four Phase-1 foundation
+docs (`00_Project_Foundation/ARCHITECTURE_OVERVIEW.md`, `TECH_STACK.md`,
+`FOLDER_STRUCTURE.md`, `PROJECT_SCOPE.md`, written 2026-10-27).
+Everything else in the folders above is a PLACEHOLDER.
+
+Written in Phase 1 (2026-10-27): the four foundation docs above —
+placeholders 440 → 436. Phase 1 done-marking is the parent's step.
 
 Name note: `docs/31_Documentation_System/DOCUMENTATION_INDEX.md` is a
 placeholder for the future documentation-system index. It is not this
@@ -130,7 +135,7 @@ records counted numbers, not claimed ones:
 - Nothing was silently dropped to force a match: the 112 phase documents
   are mapped above (not duplicated), 4 files are EXCLUDED with reasons,
   2 files were added (HOSTINGER_DEPLOYMENT.md, modules/README.md), and
-  this tree holds 440 placeholders + 3 written files.
+  this tree holds 436 placeholders + 7 written files.
 
 ## Sync rule (summary — full rule in agents.md)
 
