@@ -1,0 +1,71 @@
+# agents.md — how work is done in muse-eternal
+
+This file governs this repository. Every other doc here must agree with it.
+On any conflict between docs, **agents.md wins** until agents.md itself is
+amended — and amending agents.md needs the owner's explicit tap.
+
+## Doc map and maintenance
+
+- `README.md` — entry point and doc map.
+- `phases.md` — phase plan, status, gates. A phase is done only when its
+  verification evidence exists (tests, builds, smoke), not when code merely
+  exists.
+- `architecture.md` — stack, layout, binding technical rules.
+- `decisions.md` — the only place decisions are recorded. If it is not in
+  `decisions.md`, it is not decided.
+- `brain.md` — living status. Update it whenever status changes: a phase
+  completes, a decision lands, a flag opens or closes.
+- Canonical specifications live in Notion ("muse eternal"). Repo docs
+  interpret them and never contradict them.
+
+## Working rules
+
+- **Spec-first.** Build from the spec, never by porting old code verbatim.
+  The previous implementation line (`eternalmu`) is reference-only: read it
+  to understand, re-derive from the spec to build. Never copy its code,
+  collections, or wording into this repo.
+- **Proposal before building.** Structure and scope are proposed and tapped
+  before work starts. Ask first when the shape of the work is in question.
+- **A tap authorises one step.** A terse approval ("go", "proceed", "apply
+  all ★") authorises only the next concrete step inside the recommended
+  sequence. It never overrides an advised guardrail or wait, and never
+  authorises deletion, a push, or a new phase.
+- **Depth over summary.** Consolidated docs carry full content, never
+  summaries. Gaps are named, never silently filled.
+- **No invention.** No invented numbers, prices, vocabulary values, fields,
+  or tiers. An empty-vocabulary field stays optional. A proposed value is
+  never silently promoted to a decided one.
+- **DRAFT is not approval.** A document marked DRAFT is a working draft even
+  when every open item inside it is decided. Approval is explicit, per doc
+  or in bulk.
+- **Verify before reporting.** No step is reported complete without its
+  evidence: tests green, builds pass, smoke checks pass, live pages
+  re-fetched where a publish is claimed. A tool's success message is not
+  verification.
+- **No commit or push without a tap.** Nothing is committed or pushed on
+  the agent's own initiative. Deletion of any kind needs an explicit word
+  for exactly what is deleted.
+- **Credential hygiene.** A secret supplied in chat is used once for exactly
+  what was asked, never stored, never repeated, and its revocation step is
+  named once.
+- **Status, compactly.** Surface honest status and short options with the
+  most-recommended marked ★ when a choice is genuinely open. Where no
+  recommendation is supported by evidence, say so plainly and offer no ★.
+
+## Standing project rules (carried, not re-decided here)
+
+- Tiers: Free < Seva < Premium < Ultra. Ultra is per-asset,
+  platform-exclusive content. No price is decided; price seeds stay empty
+  and prices are decided at pre-launch.
+- AI is editor-assist only (ADR-010): AI may draft or suggest inside the
+  editor's workflow; nothing AI-generated is saved, applied, or published
+  without explicit editor action, and AI-assisted content passes S32
+  review. Autonomous AI (auto-publish, auto-apply, visitor-facing AI
+  generation) is banned.
+- S32 (Editorial Workflow & Versioning) governs content records, not media
+  file rows. The deterministic knot/grid carve-out (D-05) stands.
+- Doctrinal claims are labelled by school. Wellness, jyotish, and vastu
+  content carries disclaimers. Haridasa and Haridasi are separate taxonomy
+  nodes, never merged.
+- One canonical master per entity; everything else links or is a view.
+- Tab counts grow as depth requires; no tab count is fixed.
