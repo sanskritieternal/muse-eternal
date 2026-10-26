@@ -14,6 +14,10 @@ carry dates; nothing here is a decision unless it also appears in
   this organisation failed on permissions before).
 - Previous implementation line (`eternalmu`, local tree only, unpushed):
   reference-only, not a source. Its work is not carried over.
+- Enterprise doc tree (`docs/`): 440 placeholders + manifest
+  (`docs/DOCUMENTATION_INDEX.md`) + module mapping, created 2026-10-27
+  from the uploaded master list (adapted; exclusions and source-total
+  reconciliation in the manifest), not yet committed.
 
 ## Next
 

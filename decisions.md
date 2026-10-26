@@ -11,6 +11,14 @@ here, it is not decided. Dates are when the decision was tapped.
   commit.
 - **2026-10-27 — Stack: NestJS + Next.js + PostgreSQL.** Prisma as ORM,
   Postgres-backed jobs, REST first, separate admin app.
+- **2026-10-27 — Enterprise doc tree adopted (adapted).** The uploaded
+  master list's structure is adopted as `docs/` (folders 00–31), with
+  adaptations where it conflicts with decided facts: agents.md governs;
+  the 112 phase documents are mapped, not duplicated; the 23 generic
+  module names are superseded by the project module system; Hostinger
+  replaces generic deployment targets; no Redis; AI files are
+  editor-assist scope only (ADR-010). Exclusions and the source-total
+  reconciliation are recorded in `docs/DOCUMENTATION_INDEX.md`.
 - **2026-10-26 — Ultra tier.** A fourth tier above Premium: per-asset,
   platform-exclusive content in any format. No Ultra price decided.
 - **2026-10-26 — Hosting: Hostinger + eternalsanskriti.com.** Provider and

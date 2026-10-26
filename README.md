@@ -25,6 +25,7 @@ copy from; everything here is derived fresh from the specs.
 | `architecture.md` | Stack, layout, and binding technical rules. |
 | `decisions.md` | The decision log — what is settled, and what is still open. |
 | `brain.md` | Living project memory: current status, open items, flags. |
+| `docs/` | Enterprise documentation tree (440 placeholders + manifest + module mapping). Governed by `docs/DOCUMENTATION_INDEX.md`. |
 
 Canonical specifications live in Notion ("muse eternal"). These repo docs
 interpret them; they never contradict them.

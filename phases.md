@@ -6,8 +6,10 @@ verification evidence (tests, builds, smoke), per `agents.md`.
 ## Phase 0 — Documentation spine — DONE 2026-10-27
 
 This file set (`README.md`, `agents.md`, `phases.md`, `architecture.md`,
-`decisions.md`, `brain.md`, `.gitignore`), committed locally. No application
-code yet.
+`decisions.md`, `brain.md`, `.gitignore`), committed locally. Enterprise
+doc tree (`docs/`, 440 placeholders + manifest + module mapping) created
+2026-10-27 from the uploaded master list (adapted), not yet committed.
+No application code yet.
 
 ## Phase 1 — Architecture skeleton — NOT STARTED
 

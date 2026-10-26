@@ -18,6 +18,34 @@ amended — and amending agents.md needs the owner's explicit tap.
 - Canonical specifications live in Notion ("muse eternal"). Repo docs
   interpret them and never contradict them.
 
+## Documentation sync rule
+
+All files stay in sync with each other, and with this file. This rule
+binds every task, including code tasks:
+
+- **Update together.** Every implementation task updates every doc it
+  affects, in the same change: the task's own docs, `brain.md`, and the
+  manifest (`docs/DOCUMENTATION_INDEX.md`) status entries. Doc updates
+  are part of the task, never a follow-up.
+- **No contradictions.** No doc may contradict agents.md or
+  `decisions.md`. On conflict, agents.md wins until agents.md itself is
+  amended (which needs the owner's explicit tap).
+- **Placeholders.** A file not needed yet is created as an empty file
+  with the standard placeholder header (status PLACEHOLDER, needed-when,
+  purpose, sync rule) — this is the "needed while developing" rule. A
+  placeholder is never cited as a completed document. It is filled only
+  in its phase, and filling flips its status to WRITTEN with the
+  manifest and `brain.md` updated in the same change.
+- **Manifest discipline.** `docs/DOCUMENTATION_INDEX.md` is updated
+  whenever a file is added, removed, renamed, or changes status. A doc
+  that does not apply is recorded there as EXCLUDED with its reason —
+  never silently dropped. A genuinely new doc may be added when a gap is
+  found; the manifest, the README map, and `brain.md` are updated in the
+  same change.
+- **Sync check before reporting.** Before any task is reported done,
+  verify the affected docs agree with each other and with agents.md —
+  not just the file that was edited.
+
 ## Working rules
 
 - **Spec-first.** Build from the spec, never by porting old code verbatim.
