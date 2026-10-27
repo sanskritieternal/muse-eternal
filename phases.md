@@ -19,20 +19,24 @@ FOLDER_STRUCTURE, PROJECT_SCOPE (00_Project_Foundation) + manifest and
 brain sync. Done-marked on parent verification under the project goal's
 autonomy grant (verification is the gate; no separate tap).
 
-## Phase 2 — API foundation + first content slice — NEXT (first slice: G01 glossary)
+## Phase 2 — API foundation + first content slice — DONE 2026-10-27 (parent-verified)
 
 NestJS API foundation (envelope, errors, public-read gating) plus G01
 glossary public reads. First slice = G01: it is first in the Phase 4
 order, and no old-web readers exist in the fresh repo to justify any
 other choice. The slice's Prisma model is a Phase 2 step (schema only,
-no migration run). G01 staff CRUD + S32 land in Phase 3. Begins after
-the Phase 1 commit, so the tree is clean.
+no migration run). G01 staff CRUD + S32 land in Phase 3. Verified:
+18/18 tests, build green, smoke health 200 / no-DB 503s / unknown 404 /
+zero 500s. Live-DB round-trip still awaits provisioning.
 
-## Phase 3 — Auth + admin + S32 on one module — NOT STARTED (one module: G01)
+## Phase 3 — Auth + admin + S32 on one module — NEXT (one module: G01)
 
 Capability-based auth, staff admin app, and the S32 workflow (draft →
 review → approve → publish, two-key publish, append-only versions) on
-G01: staff CRUD + S32 on the Phase 2 slice. Follows Phase 2.
+G01: staff CRUD + S32 on the Phase 2 slice. Completes the G01 model
+alongside staff CRUD (#7 Part of Speech, #9 Extended Definition,
+repeaters — out of the Phase 2 model by design). Begins after the
+Phase 2 commit, so the tree is clean.
 
 ## Phase 4 — Module-by-module migration — NOT STARTED
 

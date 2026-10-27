@@ -1,0 +1,66 @@
+// Prisma schema — Phase 2: G01 glossary slice only.
+// Schema ONLY: no migration run, no seed. The slice's fields follow the
+// G01 v5 spec (~/workspace/v5_all/G01_GlossaryTerm_v5.md). No category
+// code is baked in: the G01 category numbering (C25 vs C09) stays OPEN.
+// Tiers: Free < Seva < Premium < Ultra; "Plus" is forbidden and never
+// appears. tierVisibility is the MINIMUM tier that may view the row;
+// public (anonymous) reads see FREE rows only.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum LanguageOfOrigin {
+  Sanskrit
+  Prakrit
+  Pali
+  Tamil
+  Hindi
+  Other
+}
+
+enum Tier {
+  FREE
+  SEVA
+  PREMIUM
+  ULTRA
+}
+
+model GlossaryTerm {
+  id                  String           @id @default(cuid())
+  // G01 #1 Title / Term (display form, title case).
+  title               String
+  // G01 #2 Short Description (spec: 200-character counter, hover cards).
+  shortDescription    String
+  // G01 #3 Summary (rich text in the editor; stored as text here).
+  summary             String?
+  // G01 #4 Term (Transliteration, IAST). List ordering is alphabetical
+  // by this field; the letter filter matches its first letter.
+  termIast            String
+  // G01 #5 Devanagari.
+  devanagari          String
+  // G01 #6 Language of Origin (spec vocabulary, closed list).
+  languageOfOrigin    LanguageOfOrigin
+  // G01 #8 Short Definition (hover-card text).
+  shortDefinition     String
+  // G01 #22 Banner (media reference; media rows themselves are a later
+  // phase — S32 governs content records, not media file rows).
+  banner              String
+  // G01 #24 Rights Holder.
+  rightsHolder        String
+  // URL slug (spec Settings tab: unique).
+  slug                String           @unique
+  // Publication + visibility gates enforced server-side on every read.
+  published           Boolean          @default(false)
+  tierVisibility      Tier             @default(FREE)
+  vocabularyRequired  Boolean          @default(false)
+  createdAt           DateTime         @default(now())
+  updatedAt           DateTime         @updatedAt
+
+  @@map("glossary_terms")
+}

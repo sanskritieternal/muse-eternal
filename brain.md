@@ -24,9 +24,10 @@ carry dates; nothing here is a decision unless it also appears in
 - Phase 1 DONE 2026-10-27 (parent-verified): four 00_Project_Foundation
   docs (ARCHITECTURE_OVERVIEW, TECH_STACK, FOLDER_STRUCTURE,
   PROJECT_SCOPE) filled from placeholders; manifest counts updated (436
-  placeholders). Phase 2 NEXT: API foundation + G01 glossary public
-  reads (first slice = G01; model in Phase 2, staff CRUD + S32 in Phase
-  3); begins after the Phase 1 commit.
+  placeholders). Phase 2 DONE 2026-10-27 (parent-verified): NestJS API
+  foundation + G01 glossary public reads (api/, 18/18 tests, build +
+  no-DB smoke green; uncommitted). Phase 3 NEXT: auth + admin + S32
+  on G01 (incl. staff CRUD + model completion: #7, #9, repeaters).
 
 ## Open items and flags
 
