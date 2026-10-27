@@ -24,7 +24,7 @@ from the files actually created, not from the source's claimed totals.
 | --- | ---: | --- |
 | 00_Project_Foundation | 12 | Phase 1 (skeleton) — foundation docs |
 | 01_Product_Requirements | 36 | Phase 4 (module work) — per-feature requirements |
-| 02_Design_System | 20 | Website batch / design system work |
+| 02_Design_System | 21 | Website batch / design system work |
 | 03_Frontend | 18 | Website batch — frontend work |
 | 04_Backend | 25 | Phases 2–3 — backend foundation and auth |
 | 05_Database | 11 | Phase 2 — database design |
@@ -57,13 +57,22 @@ from the files actually created, not from the source's claimed totals.
 | **Total placeholders** | **436** | |
 
 Real (WRITTEN) files in `docs/`: this manifest, `README.md` (tree readme),
-`modules/README.md` (module mapping), and the four Phase-1 foundation
+`modules/README.md` (module mapping), the four Phase-1 foundation
 docs (`00_Project_Foundation/ARCHITECTURE_OVERVIEW.md`, `TECH_STACK.md`,
-`FOLDER_STRUCTURE.md`, `PROJECT_SCOPE.md`, written 2026-10-27).
+`FOLDER_STRUCTURE.md`, `PROJECT_SCOPE.md`, written 2026-10-27), and
+`02_Design_System/DESIGN_SYSTEM.md` (design-system foundation, written
+2026-10-27).
 Everything else in the folders above is a PLACEHOLDER.
 
 Written in Phase 1 (2026-10-27): the four foundation docs above —
 placeholders 440 → 436. Phase 1 done-marking is the parent's step.
+
+Written 2026-10-27 (design-system foundation, ahead of the Website
+batch at the owner's direction): `02_Design_System/DESIGN_SYSTEM.md`
+added as a NEW written doc (not a flipped placeholder) — folder 02
+goes 20 → 21 files; placeholders stay 436; written files 7 → 8.
+Its token values are PROPOSED pending alignment with the approved
+Puranas mockup.
 
 Name note: `docs/31_Documentation_System/DOCUMENTATION_INDEX.md` is a
 placeholder for the future documentation-system index. It is not this
@@ -135,7 +144,7 @@ records counted numbers, not claimed ones:
 - Nothing was silently dropped to force a match: the 112 phase documents
   are mapped above (not duplicated), 4 files are EXCLUDED with reasons,
   2 files were added (HOSTINGER_DEPLOYMENT.md, modules/README.md), and
-  this tree holds 436 placeholders + 7 written files.
+  this tree holds 436 placeholders + 8 written files.
 
 ## Sync rule (summary — full rule in agents.md)
 

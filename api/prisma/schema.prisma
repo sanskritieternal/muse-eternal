@@ -1,10 +1,17 @@
-// Prisma schema — Phase 2: G01 glossary slice only.
+// Prisma schema — Phase 2: G01 glossary slice; Phase 3: auth + S32 on G01.
 // Schema ONLY: no migration run, no seed. The slice's fields follow the
 // G01 v5 spec (~/workspace/v5_all/G01_GlossaryTerm_v5.md). No category
 // code is baked in: the G01 category numbering (C25 vs C09) stays OPEN.
 // Tiers: Free < Seva < Premium < Ultra; "Plus" is forbidden and never
 // appears. tierVisibility is the MINIMUM tier that may view the row;
 // public (anonymous) reads see FREE rows only.
+// Phase 3 notes: S32 workflow state lives on the term (workflowState);
+// `published` stays the public-read gate and is kept in sync with it
+// (published = true exactly when workflowState = PUBLISHED). Repeaters
+// are stored as JSON (typed row shapes in glossary.types.ts) until a
+// dedicated model is justified — flagged in the Phase 3 report.
+// localeStates is a generic per-locale state overlay (S33 shape NOT
+// assumed; S33 confirmation still owed).
 
 generator client {
   provider = "prisma-client-js"
@@ -29,6 +36,13 @@ enum Tier {
   SEVA
   PREMIUM
   ULTRA
+}
+
+enum WorkflowState {
+  DRAFT
+  REVIEW
+  APPROVE
+  PUBLISHED
 }
 
 model GlossaryTerm {
@@ -59,8 +73,150 @@ model GlossaryTerm {
   published           Boolean          @default(false)
   tierVisibility      Tier             @default(FREE)
   vocabularyRequired  Boolean          @default(false)
+  // Phase 3 — S32 workflow state (closed set; see workflow.service.ts).
+  workflowState       WorkflowState    @default(DRAFT)
+  submittedAt         DateTime?
+  submittedBy         String?
+  publishedAt         DateTime?
+  publishedBy         String?
+  returnedAt          DateTime?
+  returnedBy          String?
+  returnReason        String?
+  archivedAt          DateTime?
+  // Phase 3 — model completion: #7 Part of Speech (open vocabulary,
+  // optional), #9 Extended Definition (rich text, optional).
+  partOfSpeech        String?
+  extendedDefinition  String?
+  // Phase 3 — repeaters (JSON; row shapes in glossary.types.ts).
+  // #10 Tradition-specific Meanings [{tradition, meaning}].
+  traditionMeanings   Json?
+  // #12 Regional Equivalents [{language, term}].
+  regionalEquivalents Json?
+  // #18 Audio Tracks [{licence, transcript}].
+  audioTracks         Json?
+  // #19 Video Items [{source, duration, captions}].
+  videoItems          Json?
+  // #20 Printable PDF [{language, script}].
+  printablePdfs       Json?
+  // #23 Image Gallery [{caption, credit, altText}].
+  imageGallery        Json?
+  // FAQ Items [{question, answer}].
+  faqItems            Json?
+  // Per-locale workflow-state overlay (generic JSON; S33 shape NOT
+  // assumed — S33 joint confirmation still owed; never drives the
+  // master workflowState).
+  localeStates        Json?
   createdAt           DateTime         @default(now())
   updatedAt           DateTime         @updatedAt
 
   @@map("glossary_terms")
+}
+
+// Phase 3 — staff identity. Roles are the seven canonical S01 slugs;
+// capabilities resolve from the S01 matrix in code (capabilities.ts),
+// never from role names in guards (except the two spec-defined
+// role-list checks: Publish Authority list, break-glass Super Admin).
+model StaffUser {
+  id             String   @id @default(cuid())
+  email          String   @unique
+  passwordHash   String
+  roles          String[]
+  failedAttempts Int      @default(0)
+  lockedUntil    DateTime?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@map("staff_users")
+}
+
+// Phase 3 — rotating refresh tokens. Stored as SHA-256 hashes (lookup
+// by hash); the raw token is never persisted. A rotated token keeps
+// its row (revokedReason 'rotated') so reuse can be detected and the
+// whole family revoked.
+model RefreshToken {
+  id                String    @id @default(cuid())
+  tokenHash         String    @unique
+  familyId          String
+  userId            String
+  expiresAt         DateTime
+  absoluteExpiresAt DateTime
+  revokedAt         DateTime?
+  revokedReason     String?
+  createdAt         DateTime  @default(now())
+
+  @@map("refresh_tokens")
+}
+
+// Phase 3 — audit log (S17 envelope, simplified: no webhook bus yet).
+// `action` is restricted to the 15-value SYS-17 vocabulary (see
+// audit.service.ts — the service rejects anything else). `hash` chains
+// from `prevHash` (SHA-256 over canonical JSON; genesis prev 'GENESIS').
+model AuditEvent {
+  id         String   @id @default(cuid())
+  action     String
+  actorId    String?
+  actorRoles String[]
+  targetType String?
+  targetId   String?
+  summary    String
+  payload    Json?
+  prevHash   String
+  hash       String
+  createdAt  DateTime @default(now())
+
+  @@map("audit_events")
+}
+
+// Phase 3 — append-only S32 versions. One row per version; rows are
+// never edited except by the 5-minute autosave coalescing rule (same
+// author, consecutive autosaves only — see workflow.service.ts).
+model GlossaryVersion {
+  id          String   @id @default(cuid())
+  documentId  String
+  version     String
+  major       Int
+  minor       Int
+  transition  String
+  actorId     String
+  changeSummary String?
+  restoredFrom  String?
+  snapshot    Json
+  createdAt   DateTime @default(now())
+
+  @@map("glossary_versions")
+}
+
+// Phase 3 — S32 review assignments. `reviewerId` null means unassigned
+// (specialist pool empty — see rosters.ts). `outcomeHistory` keeps
+// prior outcomes when an assignment re-opens as Pending.
+model ReviewAssignment {
+  id             String   @id @default(cuid())
+  documentId     String
+  reviewerId     String?
+  reviewType     String   @default("general")
+  roster         String?
+  poolEmpty      Boolean  @default(false)
+  outcome        String   @default("pending")
+  notes          String?
+  annotations    Json?
+  dueAt          DateTime?
+  escalated      Boolean  @default(false)
+  outcomeHistory Json?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@map("review_assignments")
+}
+
+// Phase 3 — specialist rosters (A-5). Populated out-of-band until a
+// roster-admin surface exists; an empty roster means the pool-empty
+// path (unassigned assignment + escalation), never a silent skip.
+model RosterMembership {
+  id        String   @id @default(cuid())
+  userId    String
+  roster    String
+  createdAt DateTime @default(now())
+
+  @@unique([userId, roster])
+  @@map("roster_memberships")
 }

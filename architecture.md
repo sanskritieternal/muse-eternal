@@ -38,6 +38,11 @@ each rule becomes real in its phase (see `phases.md`).
   A gated read returns 404 (or an empty list), never leaked content.
 - **No-database reads** fail as 503, never as fabricated data and never
   as 500.
+- **No stubs, no mock responses.** An unbuilt route does not exist
+  (404), never a fake 200; no response ever carries fabricated data.
+  Data needed for development/demo comes only from seed files under
+  `api/prisma/seed/` (see the production-readiness rule in
+  `agents.md`).
 
 ## Auth
 

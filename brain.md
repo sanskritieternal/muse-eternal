@@ -26,8 +26,22 @@ carry dates; nothing here is a decision unless it also appears in
   PROJECT_SCOPE) filled from placeholders; manifest counts updated (436
   placeholders). Phase 2 DONE 2026-10-27 (parent-verified): NestJS API
   foundation + G01 glossary public reads (api/, 18/18 tests, build +
-  no-DB smoke green; uncommitted). Phase 3 NEXT: auth + admin + S32
-  on G01 (incl. staff CRUD + model completion: #7, #9, repeaters).
+  no-DB smoke green; committed + pushed 2969ffe). Phase 3 DONE
+  2026-10-27 (parent-verified): capability-based auth
+  (JWT 15 min + rotating hashed refresh, argon2id, 5/15 lockout) +
+  admin/ Next app (G01 only) + S32 workflow on G01 (staff CRUD, model
+  completion #7/#9/repeaters, two-key publish, Super Admin break-glass,
+  append-only versions, 72h reassign, 5-min autosave coalescing,
+  roster-filtered reviewers); api 62/62 tests, both builds + both
+  smokes green, uncommitted). Phase 4 NEXT: migration from S01.
+- Design-system foundation written 2026-10-27
+  (`02_Design_System/DESIGN_SYSTEM.md`, tokens PROPOSED): awaits
+  alignment with the approved Puranas mockup + parent verification;
+  component code lands after mockup approval.
+- Production-readiness rule set 2026-10-27 (`agents.md` + `decisions.md`
+  + `architecture.md` + design doc + phases gates): no placeholders,
+  TODOs, stubs, "coming soon", or mock/dummy data in the shipped
+  product; seed files under `api/prisma/seed/` when data is needed.
 
 ## Open items and flags
 

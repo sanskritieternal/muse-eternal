@@ -35,7 +35,10 @@ binds every task, including code tasks:
   purpose, sync rule) — this is the "needed while developing" rule. A
   placeholder is never cited as a completed document. It is filled only
   in its phase, and filling flips its status to WRITTEN with the
-  manifest and `brain.md` updated in the same change.
+  manifest and `brain.md` updated in the same change. These headers are
+  status labels for not-yet-written docs, not product placeholders:
+  they carry no fake content. (See the production-readiness rule
+  below, which governs the shipped product.)
 - **Manifest discipline.** `docs/DOCUMENTATION_INDEX.md` is updated
   whenever a file is added, removed, renamed, or changes status. A doc
   that does not apply is recorded there as EXCLUDED with its reason —
@@ -66,6 +69,30 @@ binds every task, including code tasks:
 - **No invention.** No invented numbers, prices, vocabulary values, fields,
   or tiers. An empty-vocabulary field stays optional. A proposed value is
   never silently promoted to a decided one.
+- **Production-ready, no fakes (owner direction 2026-10-27).** The
+  shipped product contains no placeholders, no TODO/FIXME markers left
+  in committed code, no stubs, no "coming soon" surfaces, and no mock,
+  hardcoded-mocked, or dummy data — in code, UI, or API responses.
+  Everything merged is production-ready end to end (API + validation +
+  tests + build + smoke). Concretely: an unbuilt route does not exist
+  (404), never a fake 200; an unbuilt surface does not appear in nav;
+  an empty state shows a real empty state ("No entries yet"), never
+  fabricated rows; no lorem ipsum, no hardcoded content rows, no fake
+  counts or names served as content. Open work lives in `phases.md` /
+  `brain.md` / goal tracking, never as code comments. When data is
+  needed for development or demo, it lives ONLY in seed files under
+  `api/prisma/seed/` (one file per module plus a loader), each headed
+  "SEED DATA — development/demo only; delete this file to remove it".
+  Seed files are never imported by production code paths; the seed
+  runner is a dev-only entry point, never wired into app startup and
+  never run in production. Removing seed data means deleting the file
+  and dropping it from the loader — nothing else to hunt down. No seed
+  files exist until data is actually needed. NOT violations of this
+  rule: test doubles inside spec files (tests only, never shipped),
+  and sample content in design mockups/artifacts that is labeled as
+  sample (never shipped as product). This rule governs the shipped
+  product; the Documentation sync rule's PLACEHOLDER headers above are
+  status labels for not-yet-written docs, not product placeholders.
 - **DRAFT is not approval.** A document marked DRAFT is a working draft even
   when every open item inside it is decided. Approval is explicit, per doc
   or in bulk.

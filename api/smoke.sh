@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
-# Phase 2 smoke: boots the real server with NO database available
-# (DATABASE_URL unset) and checks the specified behavior.
+# Phase 2 + Phase 3 smoke: boots the real server with NO database
+# available (DATABASE_URL unset) and checks the specified behavior.
 # Expected: /health 200, /glossary 503, /glossary/<slug> 503,
-# unknown route 404 (RFC 9457), zero 500s.
+# staff routes 401 without credentials, login 503 with no DB
+# (auth reaches the DB before any credential check), unknown route
+# 404 (RFC 9457), zero 500s.
 set -u
 cd "$(dirname "$0")"
 
@@ -49,7 +51,19 @@ check() { # $1 name, $2 path, $3 expected status
 check "health" "/health" 200
 check "glossary list (no DB)" "/glossary" 503
 check "glossary detail (no DB)" "/glossary/dharma" 503
+check "staff glossary list (no session)" "/staff/glossary" 401
+check "staff glossary detail (no session)" "/staff/glossary/dharma" 401
+check "staff audit (no session)" "/staff/audit" 401
 check "unknown route" "/no-such-route" 404
+
+# Login with no DB: POST body, expect 503 (DB unreachable before any
+# credential comparison — no account-existence signal leaks).
+code=$(curl -s -o /tmp/muse-smoke-body.json -w "%{http_code}" -X POST \
+  -H "Content-Type: application/json" -d '{"email":"a@example.test","password":"x"}' \
+  "http://localhost:$PORT/auth/login")
+body=$(cat /tmp/muse-smoke-body.json)
+if [ "$code" = "503" ]; then echo "PASS login (no DB) -> 503"; else
+  echo "FAIL login (no DB) -> $code (expected 503) body: $body"; FAIL=1; fi
 
 echo "--- sample /glossary body ---"
 curl -s "http://localhost:$PORT/glossary"

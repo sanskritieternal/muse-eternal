@@ -53,6 +53,14 @@ here, it is not decided. Dates are when the decision was tapped.
 - **Standing — 301 mapping (implementation: Website batch).** W-1→13.1,
   W-2..W-10→13.27, W-11→13.30, W-12→13.26, W-13→13.28; R01→13.27, R02→13.30,
   R03→13.26, R04→13.28; the v1 page is never deleted.
+- **DECIDED — Production-readiness rule (2026-10-27).** No placeholders,
+  TODOs, stubs, "coming soon" surfaces, or mock/hardcoded/dummy data in
+  the shipped product; everything merged is production-ready end to
+  end. Data needed for development/demo lives only in seed files under
+  `api/prisma/seed/` (dev-only entry point, never shipped, removable by
+  deleting the file + loader entry). Test doubles and labeled mockup
+  sample content are not violations; docs PLACEHOLDER headers are
+  status labels, not product placeholders.
 
 ## Open (not decisions — implemented around, never over)
 

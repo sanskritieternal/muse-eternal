@@ -29,16 +29,18 @@ no migration run). G01 staff CRUD + S32 land in Phase 3. Verified:
 18/18 tests, build green, smoke health 200 / no-DB 503s / unknown 404 /
 zero 500s. Live-DB round-trip still awaits provisioning.
 
-## Phase 3 — Auth + admin + S32 on one module — NEXT (one module: G01)
+## Phase 3 — Auth + admin + S32 on one module — DONE 2026-10-27 (parent-verified)
 
 Capability-based auth, staff admin app, and the S32 workflow (draft →
 review → approve → publish, two-key publish, append-only versions) on
 G01: staff CRUD + S32 on the Phase 2 slice. Completes the G01 model
 alongside staff CRUD (#7 Part of Speech, #9 Extended Definition,
-repeaters — out of the Phase 2 model by design). Begins after the
-Phase 2 commit, so the tree is clean.
+repeaters — out of the Phase 2 model by design). Verified: 62/62 API
+tests, api + admin builds green, api smoke (staff 401s, login 503,
+zero 500s), admin smoke (307 → login, zero 500s). Live-DB round-trip,
+seed, MFA, and first-Super-Admin bootstrap still await provisioning.
 
-## Phase 4 — Module-by-module migration — NOT STARTED
+## Phase 4 — Module-by-module migration — NEXT (from S01)
 
 Each module in this order (autonomous under the project goal):
 
@@ -61,6 +63,15 @@ Website surfaces for the migrated modules, and archiving of the previous
 implementation line. Needs all migration waves verified plus an explicit
 tap. Never before parity.
 
+## Cross-phase: design system — FOUNDATION DONE 2026-10-27 (parent-verified)
+
+Foundation doc `docs/02_Design_System/DESIGN_SYSTEM.md` (tokens PROPOSED,
+component inventory, accessibility guardrails, adoption plan). Tokens
+align to the approved Puranas mockup after user review; component code
+lands after mockup approval. `admin/` (Phase 3) adopts tokens centrally
+so post-approval alignment is a one-file change; `web/` adopts fully at
+Phase 5 surfaces.
+
 ## Excluded from every phase
 
 - Promotions of skeleton/index-only modules (C24–C33): each needs a
@@ -81,6 +92,10 @@ tap. Never before parity.
 - No phase is reported done without its verification evidence (tests,
   builds, and smoke for code phases; manifest + brain + cross-check
   evidence for docs-only phases).
+- Production-readiness (owner direction 2026-10-27): no phase is done
+  with placeholders, TODOs, stubs, "coming soon" surfaces, or
+  mock/dummy data; needed data ships as seed files under
+  `api/prisma/seed/` (see `agents.md`).
 - Nothing is committed or pushed without a tap, per `agents.md`.
   Deletions still need an explicit word for exactly what is deleted.
   Owner-gated items stay gated.
